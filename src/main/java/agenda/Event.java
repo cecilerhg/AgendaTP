@@ -1,10 +1,11 @@
 package agenda;
 
 import java.time.*;
+import java.time.chrono.ChronoLocalDate;
 
 public class Event {
 
-    /**
+  /**
      * The myTitle of this event
      */
     private String myTitle;
@@ -40,8 +41,13 @@ public class Event {
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        if (aDay.isEqual(ChronoLocalDate.from(this.myStart)) || aDay.isEqual(ChronoLocalDate.from(this.myStart.plus(this.myDuration))) || aDay.isBefore(ChronoLocalDate.from(this.myStart.plus(this.myDuration))) && aDay.isAfter(ChronoLocalDate.from(this.myStart))) {
+            return true;
+            
+        } else {
+            return false;
+        }
+            
     }
    
     /**
@@ -66,6 +72,9 @@ public class Event {
         return myDuration;
     }
 
-   
+   //ToString   
+    public String toString() {
+        return "Titre événement : " + this.getTitle() + "Début: " + this.getStart() + "Durée: " + this.getDuration() ;
+    }
     
 }
